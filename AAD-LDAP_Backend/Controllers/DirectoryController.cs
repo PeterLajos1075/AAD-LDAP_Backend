@@ -10,8 +10,20 @@ namespace AAD_LDAP_Backend.Controllers
     [Route("[controller]")]
     public class DirectoryController : ControllerBase
     {
+        private readonly InterFace _context;
 
+        public DirectoryController(InterFace context)
+        {
+            _context = context;
+        }
 
+        [HttpGet]
+        [Route("GetAllUsers")]
+        public IActionResult ReadAllUsers()
+        {
+            var res = _context.ReadAllUsers();
+            return Ok(res);
+        }
 
     }
 }

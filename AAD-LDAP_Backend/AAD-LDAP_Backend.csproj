@@ -8,16 +8,11 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Lucene.Net" Version="3.0.3" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="7.0.13" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.5.0" />
     <PackageReference Include="System.DirectoryServices.AccountManagement" Version="7.0.1" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Controllers\" />
-    <Folder Include="Entitys\" />
-    <Folder Include="Repository\" />
   </ItemGroup>
 
 </Project>
