@@ -1,12 +1,26 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using System.Reflection.PortableExecutable;
+using System.DirectoryServices;
 
 namespace AAD_LDAP_Backend.Context
 {
-    public class ContextBasic : DbContext
+    public class ContextBasic : InterFace
     {
-        public ContextBasic(DbContextOptions<ContextBasic> opt) : base(opt) { }
 
-        DirectoryEntry entry = DirectoryEntry("LDAP://OU=Users,OU=Hauni Hungaria,DC=HUNGARIA,DC=KOERBER,DC=DE");
+        DirectoryEntry domain = new DirectoryEntry("LDAP://OU=Users,OU=Hauni Hungaria,DC=HUNGARIA,DC=KOERBER,DC=DE");
+
+        public Task<List<T>> ReadAll()
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<List<T>> ReadAllUsers()
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<List<T>> ReadByName(string? Name)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

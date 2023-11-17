@@ -5,14 +5,11 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Host.ConfigureLogging(logging => { logging.AddConsole(); });
 
-
-builder.Services.AddDbContext<ContextBasic>(opt =>
-{
-    
-});
-
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
+
+builder.Services.AddSingleton<InterFace, ContextBasic>();  
+
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 

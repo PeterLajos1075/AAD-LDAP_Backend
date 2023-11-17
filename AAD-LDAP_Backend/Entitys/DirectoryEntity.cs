@@ -11,7 +11,7 @@ namespace AAD_LDAP_Backend.Entitys
 
         public string? department { get; set; }
 
-        [EmailAddress, MaxLength(150, ErrorMessage = "MaxLength is 150")]
+        [EmailAddress]
         public string? mail { get; set; }
 
         public string? extensionAttribute { get; set; }
