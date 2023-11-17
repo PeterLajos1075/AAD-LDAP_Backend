@@ -10,7 +10,6 @@ namespace AAD_LDAP_Backend.Controllers
     [Route("[controller]")]
     public class DirectoryController : ControllerBase
     {
-        
 
 
 

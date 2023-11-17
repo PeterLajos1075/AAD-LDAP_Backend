@@ -1,4 +1,7 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using AAD_LDAP_Backend.Entitys;
+using Microsoft.EntityFrameworkCore;
+using System.Collections.Generic;
+using System.Diagnostics;
 using System.DirectoryServices;
 
 namespace AAD_LDAP_Backend.Context
@@ -8,19 +11,35 @@ namespace AAD_LDAP_Backend.Context
 
         DirectoryEntry domain = new DirectoryEntry("LDAP://OU=Users,OU=Hauni Hungaria,DC=HUNGARIA,DC=KOERBER,DC=DE");
 
-        public Task<List<T>> ReadAll()
-        {
-            throw new NotImplementedException();
-        }
 
-        public Task<List<T>> ReadAllUsers()
-        {
-            throw new NotImplementedException();
-        }
 
-        public Task<List<T>> ReadByName(string? Name)
+        public List<DirectoryEntity> ReadAll()
         {
-            throw new NotImplementedException();
+
+            SearchResultCollection results;
+            DirectorySearcher ds = null;
+
+            ds = new DirectorySearcher(domain);
+
+            ds.Filter = "(&(objectCategory=User)";
+
+            results = ds.FindAll();
+
+            List<DirectoryEntity> Users = new List<DirectoryEntity>();
+
+
+            foreach (SearchResult sr in results)
+            {
+                DirectoryEntity us = new DirectoryEntity();
+                us.Name = sr.Properties["Name"][0].ToString();
+                us.sAMAccountName = sr.Properties["sAMAccountName"][0].ToString();
+                us.department = sr.Properties["department"][0].ToString();
+                us.mail = sr.Properties["mail"][0].ToString();
+                us.extensionAttribute = sr.Properties["extensionAttribute"][0].ToString();
+                us.manager = sr.Properties["manager"][0].ToString();
+                Users.Add(us);
+            }
+            return Users;
         }
     }
 }
