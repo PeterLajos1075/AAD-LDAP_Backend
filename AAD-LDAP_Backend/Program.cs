@@ -8,7 +8,7 @@ builder.Host.ConfigureLogging(logging => { logging.AddConsole(); });
 
 builder.Services.AddDbContext<ContextBasic>(opt =>
 {
-
+    
 });
 
 builder.Services.AddControllers();
