@@ -2,9 +2,9 @@
 
 public interface InterFace
 {
-    Task<List<DirectoryEntity>> ReadAll();
-    Task<List<DirectoryEntity>> ReadByName(string? Name);
-    Task<List<DirectoryEntity>> ReadAllUsers();
+    List<DirectoryEntity> ReadAllUsers();
+    //Task<List<DirectoryEntity>> ReadByName(string? Name);
+    //Task<List<DirectoryEntity>> ReadAllUsers();
 
 }
 

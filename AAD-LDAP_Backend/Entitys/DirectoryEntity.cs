@@ -5,7 +5,7 @@ namespace AAD_LDAP_Backend.Entitys
 {
     public class DirectoryEntity
     {
-        public string? Name { get; set; }
+        public string? DisplayName { get; set; }
 
         public string? sAMAccountName { get; set; }
 
