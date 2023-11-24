@@ -34,22 +34,36 @@ namespace AAD_LDAP_Backend.Context
 
             foreach (SearchResult sr in results)
             {
-                DirectoryEntity us = new DirectoryEntity();
+                Users.Add(BuildUser(sr));
 
-
-                us.DisplayName = sr.Properties.Contains("displayName") ? sr.Properties["displayName"][0].ToString()! : string.Empty;
-                us.sAMAccountName = sr.Properties.Contains("sAMAccountName") ? sr.Properties["sAMAccountName"][0].ToString()! : string.Empty;
-                us.department = sr.Properties.Contains("department") ? sr.Properties["department"][0].ToString()! : string.Empty;
-                us.mail = sr.Properties.Contains("mail") ? sr.Properties["mail"][0].ToString()! : string.Empty;
-                us.extensionAttribute = sr.Properties.Contains("extensionAttribute5") ? sr.Properties["extensionAttribute5"][0].ToString()! : string.Empty;
-                us.manager = sr.Properties.Contains("manager") ? sr.Properties["manager"][0].ToString()! : string.Empty;
-
-
-
-
-                Users.Add(us);
             }
             return Users;
+        }
+
+        public DirectoryEntity ReadByName(string Name)
+        {
+            DirectorySearcher ds = new DirectorySearcher(domain);
+            SearchResult sr;
+
+            ds.Filter = "(&(objectCategory=User)(sAMAccountName=" + Name + "))";
+
+            sr = ds.FindOne();
+
+            return BuildUser(sr);
+        }
+
+        public DirectoryEntity BuildUser(SearchResult sr)
+        {
+            DirectoryEntity us = new DirectoryEntity();
+
+            us.DisplayName = sr.Properties.Contains("displayName") ? sr.Properties["displayName"][0].ToString()! : string.Empty;
+            us.sAMAccountName = sr.Properties.Contains("sAMAccountName") ? sr.Properties["sAMAccountName"][0].ToString()! : string.Empty;
+            us.department = sr.Properties.Contains("department") ? sr.Properties["department"][0].ToString()! : string.Empty;
+            us.mail = sr.Properties.Contains("mail") ? sr.Properties["mail"][0].ToString()! : string.Empty;
+            us.extensionAttribute = sr.Properties.Contains("extensionAttribute5") ? sr.Properties["extensionAttribute5"][0].ToString()! : string.Empty;
+            us.manager = sr.Properties.Contains("manager") ? sr.Properties["manager"][0].ToString()! : string.Empty;
+
+            return us;
         }
     }
 }
